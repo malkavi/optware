@@ -1,8 +1,0 @@
-#!/bin/sh
-
-echo ; echo
-echo "To complete the installation, you must edit /opt/etc/appWeb.conf,"
-echo "and then run /opt/etc/init.d/S81appweb to restart AppWeb."
-echo
-
-/opt/etc/init.d/S81appweb
