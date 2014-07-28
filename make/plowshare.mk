@@ -21,11 +21,17 @@
 # "NSLU2 Linux" other developers will feel free to edit.
 #
 PLOWSHARE_SITE=http://plowshare.googlecode.com/files
-PLOWSHARE_VERSION=snapshot-git20131103.89c1220
-PLOWSHARE_SOURCE=plowshare3-$(PLOWSHARE_VERSION).tar.gz
-PLOWSHARE_DIR=plowshare3-$(PLOWSHARE_VERSION)
+PLOWSHARE_REPOSITORY=https://code.google.com/p/plowshare/
+
+#PLOWSHARE_GIT_TAG=v1.0.4
+#PLOWSHARE_TREEISH=$(LUNASERVICE_GIT_TAG)
+
+PLOWSHARE_VERSION=1.0.4
+PLOWSHARE_SOURCE=plowshare4-$(PLOWSHARE_VERSION).tar.gz
+PLOWSHARE_DIR=plowshare4-$(PLOWSHARE_VERSION)
 PLOWSHARE_UNZIP=zcat
-PLOWSHARE_MAINTAINER=NSLU2 Linux <nslu2-linux@yahoogroups.com>
+
+PLOWSHARE_MAINTAINER=mcra...@gmail.com
 PLOWSHARE_DESCRIPTION=A command-line downloader and uploader for some of the most popular file sharing websites
 PLOWSHARE_SECTION=utils
 PLOWSHARE_PRIORITY=optional
@@ -76,8 +82,15 @@ PLOWSHARE_IPK=$(BUILD_DIR)/plowshare_$(PLOWSHARE_VERSION)-$(PLOWSHARE_IPK_VERSIO
 # then it will be fetched from the site using wget.
 #
 $(DL_DIR)/$(PLOWSHARE_SOURCE):
-	$(WGET) -P $(@D) $(PLOWSHARE_SITE)/$(@F) || \
-	$(WGET) -P $(@D) $(SOURCES_NLO_SITE)/$(@F)
+	(cd $(BUILD_DIR) ; \
+		rm -rf plowshare && \
+		git clone --bare $(PLOWSHARE_REPOSITORY) plowshare && \
+		cd lunaservice && \
+		(git archive --format=tar --prefix=$(LUNASERVICE_DIR)/ $(LUNASERVICE_TREEISH) | gzip > $@) && \
+		rm -rf plowshare ; \
+	)
+	#$(WGET) -P $(@D) $(PLOWSHARE_SITE)/$(@F) || \
+	#$(WGET) -P $(@D) $(SOURCES_NLO_SITE)/$(@F)
 
 #
 # The source code depends on it existing within the download directory.
