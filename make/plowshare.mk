@@ -128,7 +128,7 @@ $(PLOWSHARE_BUILD_DIR)/.configured: $(DL_DIR)/$(PLOWSHARE_SOURCE) $(PLOWSHARE_PA
 	if test "$(BUILD_DIR)/$(PLOWSHARE_DIR)" != "$(@D)" ; \
 		then mv $(BUILD_DIR)/$(PLOWSHARE_DIR) $(@D) ; \
 	fi
-	sed -i -e '/^USRDIR=/s|/usr/local|/opt|' $(@D)/setup.sh
+#	sed -i -e '/^USRDIR=/s|/usr/local|/opt|' $(@D)/setup.sh
 	find $(@D)/src -name '*.sh' | \
 		xargs sed -i -e '1s|#!.*/bash|#!/opt/bin/bash|'
 #	(cd $(@D); \
@@ -203,9 +203,18 @@ $(PLOWSHARE_IPK_DIR)/CONTROL/control:
 # You may need to patch your application to make it use these locations.
 #
 $(PLOWSHARE_IPK): $(PLOWSHARE_BUILD_DIR)/.built
+#	echo $@
+#	rm -f $@
+#	echo $(@D)
+#	$(TARGET_CONFIGURE_OPTS) \
+#	$(MAKE) -C $(@D) \
+#	CC="$(TARGET_CROSS)gcc" \
+#	CFLAGS="$(STAGING_CPPFLAGS) $(PLOWSHARE_CPPFLAGS)" INCLUDES= \
+#	LIBS="$(STAGING_LDFLAGS) $(PLOWSHARE_LDFLAGS)"
+#	touch $@
 	rm -rf $(PLOWSHARE_IPK_DIR) $(BUILD_DIR)/plowshare_*_$(TARGET_ARCH).ipk
 	cd $(<D); \
-		DESTDIR=$(PLOWSHARE_IPK_DIR) PREFIX=/opt bash ./setup.sh install
+		DESTDIR=$(PLOWSHARE_IPK_DIR) PREFIX=/opt make install
 	$(MAKE) $(PLOWSHARE_IPK_DIR)/CONTROL/control
 	install -m755 $(PLOWSHARE_SOURCE_DIR)/postinst $(PLOWSHARE_IPK_DIR)/CONTROL/
 	echo $(PLOWSHARE_CONFFILES) | sed -e 's/ /\n/g' > $(PLOWSHARE_IPK_DIR)/CONTROL/conffiles
