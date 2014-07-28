@@ -21,9 +21,9 @@
 # "NSLU2 Linux" other developers will feel free to edit.
 #
 PLOWSHARE_SITE=http://plowshare.googlecode.com/files
-PLOWSHARE_VERSION=0.9.1
-PLOWSHARE_SOURCE=plowshare-$(PLOWSHARE_VERSION).tgz
-PLOWSHARE_DIR=plowshare-$(PLOWSHARE_VERSION)
+PLOWSHARE_VERSION=snapshot-git20131103.89c1220
+PLOWSHARE_SOURCE=plowshare3-$(PLOWSHARE_VERSION).tar.gz
+PLOWSHARE_DIR=plowshare3-$(PLOWSHARE_VERSION)
 PLOWSHARE_UNZIP=zcat
 PLOWSHARE_MAINTAINER=NSLU2 Linux <nslu2-linux@yahoogroups.com>
 PLOWSHARE_DESCRIPTION=A command-line downloader and uploader for some of the most popular file sharing websites
@@ -36,7 +36,7 @@ PLOWSHARE_CONFLICTS=
 #
 # PLOWSHARE_IPK_VERSION should be incremented when the ipk changes.
 #
-PLOWSHARE_IPK_VERSION=1
+PLOWSHARE_IPK_VERSION=3
 
 #
 # PLOWSHARE_CONFFILES should be a list of user-editable files
@@ -192,7 +192,7 @@ $(PLOWSHARE_IPK_DIR)/CONTROL/control:
 $(PLOWSHARE_IPK): $(PLOWSHARE_BUILD_DIR)/.built
 	rm -rf $(PLOWSHARE_IPK_DIR) $(BUILD_DIR)/plowshare_*_$(TARGET_ARCH).ipk
 	cd $(<D); \
-		DESTDIR=$(PLOWSHARE_IPK_DIR) PREFIX=/opt ./setup.sh install
+		DESTDIR=$(PLOWSHARE_IPK_DIR) PREFIX=/opt bash ./setup.sh install
 	$(MAKE) $(PLOWSHARE_IPK_DIR)/CONTROL/control
 	install -m755 $(PLOWSHARE_SOURCE_DIR)/postinst $(PLOWSHARE_IPK_DIR)/CONTROL/
 	echo $(PLOWSHARE_CONFFILES) | sed -e 's/ /\n/g' > $(PLOWSHARE_IPK_DIR)/CONTROL/conffiles
