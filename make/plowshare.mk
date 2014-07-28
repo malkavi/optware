@@ -24,7 +24,7 @@ PLOWSHARE_SITE=http://plowshare.googlecode.com/files
 PLOWSHARE_REPOSITORY=https://code.google.com/p/plowshare/
 
 #PLOWSHARE_GIT_TAG=v1.0.4
-#PLOWSHARE_TREEISH=$(LUNASERVICE_GIT_TAG)
+#PLOWSHARE_TREEISH=$(PLOWSHARE_GIT_TAG)
 
 PLOWSHARE_VERSION=1.0.4
 PLOWSHARE_SOURCE=plowshare4-$(PLOWSHARE_VERSION).tar.gz
@@ -85,8 +85,8 @@ $(DL_DIR)/$(PLOWSHARE_SOURCE):
 	(cd $(BUILD_DIR) ; \
 		rm -rf plowshare && \
 		git clone --bare $(PLOWSHARE_REPOSITORY) plowshare && \
-		cd lunaservice && \
-		(git archive --format=tar --prefix=$(LUNASERVICE_DIR)/ $(LUNASERVICE_TREEISH) | gzip > $@) && \
+		cd plowshare && \
+		(git archive --format=tar --prefix=$(PLOWSHARE_DIR)/ $(PLOWSHARE_TREEISH) | gzip > $@) && \
 		rm -rf plowshare ; \
 	)
 	#$(WGET) -P $(@D) $(PLOWSHARE_SITE)/$(@F) || \
