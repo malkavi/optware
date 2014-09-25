@@ -23,7 +23,7 @@
 BASH_SITE=http://ftp.gnu.org/gnu/bash/
 BASH_VER=4.3
 # must match patch files
-BASH_PATCH_LEVEL=18
+BASH_PATCH_LEVEL=25
 BASH_VERSION=$(BASH_VER).$(BASH_PATCH_LEVEL)
 BASH_SOURCE=bash-$(BASH_VER).tar.gz
 BASH_DIR=bash-$(BASH_VER)
