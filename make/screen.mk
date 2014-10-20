@@ -19,9 +19,10 @@
 #
 # You should change all these variables to suit your package.
 #
-SCREEN_SITE=ftp://ftp.uni-erlangen.de/pub/utilities/screen
+SCREEN_SITE=http://ftp.gnu.org/gnu/screen/
+#ftp://ftp.uni-erlangen.de/pub/utilities/screen
 # ftp://ftp.ibiblio.org/pub/mirrors/gnu/ftp/gnu/screen/
-SCREEN_VERSION=4.0.3
+SCREEN_VERSION=4.2.1
 SCREEN_SOURCE=screen-$(SCREEN_VERSION).tar.gz
 SCREEN_DIR=screen-$(SCREEN_VERSION)
 SCREEN_UNZIP=zcat
@@ -36,13 +37,14 @@ SCREEN_CONFLICTS=
 #
 # SCREEN_IPK_VERSION should be incremented when the ipk changes.
 #
-SCREEN_IPK_VERSION=2
+SCREEN_IPK_VERSION=3
 
 #
 # SCREEN_PATCHES should list any patches, in the the order in
 # which they should be applied to the source code.
 #
-SCREEN_PATCHES=$(SCREEN_SOURCE_DIR)/configure.patch 
+SCREEN_PATCHES=
+#$(SCREEN_SOURCE_DIR)/configure.patch 
 
 #
 # If the compilation of the package requires additional
@@ -80,7 +82,8 @@ $(DL_DIR)/$(SCREEN_SOURCE):
 # This target will be called by the top level Makefile to download the
 # source code's archive (.tar.gz, .bz2, etc.)
 #
-screen-source: $(DL_DIR)/$(SCREEN_SOURCE) $(SCREEN_PATCHES)
+screen-source: $(DL_DIR)/$(SCREEN_SOURCE)
+# $(SCREEN_PATCHES)
 
 #
 # This target unpacks the source code in the build directory.
@@ -97,11 +100,10 @@ screen-source: $(DL_DIR)/$(SCREEN_SOURCE) $(SCREEN_PATCHES)
 # If the compilation of the package requires other packages to be staged
 # first, then do that first (e.g. "$(MAKE) <bar>-stage <baz>-stage").
 #
-$(SCREEN_BUILD_DIR)/.configured: $(DL_DIR)/$(SCREEN_SOURCE) $(SCREEN_PATCHES) make/screen.mk
+$(SCREEN_BUILD_DIR)/.configured: $(DL_DIR)/$(SCREEN_SOURCE) make/screen.mk
 	$(MAKE) termcap-stage
 	rm -rf $(BUILD_DIR)/$(SCREEN_DIR) $(SCREEN_BUILD_DIR)
 	$(SCREEN_UNZIP) $(DL_DIR)/$(SCREEN_SOURCE) | tar -C $(BUILD_DIR) -xvf -
-	cat $(SCREEN_PATCHES) | patch -d $(BUILD_DIR)/$(SCREEN_DIR) 
 	mv $(BUILD_DIR)/$(SCREEN_DIR) $(SCREEN_BUILD_DIR)
 	(cd $(SCREEN_BUILD_DIR); \
 		$(TARGET_CONFIGURE_OPTS) \
