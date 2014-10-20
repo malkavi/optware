@@ -3,8 +3,8 @@
 # $Id$
 #
 
-VERSION=4.0.3
-SCREEN=/opt/bin/screen-4.0.3
+VERSION=4.2.1
+SCREEN=/opt/bin/screen-4.2.1
 
 chown root:root $SCREEN
 chmod 4711 $SCREEN
