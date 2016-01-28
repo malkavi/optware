@@ -20,7 +20,7 @@
 # You should change all these variables to suit your package.
 #
 LIBTOOL_SITE=http://ftp.gnu.org/gnu/libtool
-LIBTOOL_VERSION=1.5.26
+LIBTOOL_VERSION=2.4.6
 LIBTOOL_SOURCE=libtool-$(LIBTOOL_VERSION).tar.gz
 LIBTOOL_DIR=libtool-$(LIBTOOL_VERSION)
 LIBTOOL_UNZIP=zcat
