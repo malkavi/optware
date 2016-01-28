@@ -21,9 +21,9 @@
 # "NSLU2 Linux" other developers will feel free to edit.
 #
 BASH_SITE=http://ftp.gnu.org/gnu/bash/
-BASH_VER=4.3
+BASH_VER=4.3.30
 # must match patch files
-BASH_PATCH_LEVEL=28
+BASH_PATCH_LEVEL=42
 BASH_VERSION=$(BASH_VER).$(BASH_PATCH_LEVEL)
 BASH_SOURCE=bash-$(BASH_VER).tar.gz
 BASH_DIR=bash-$(BASH_VER)
