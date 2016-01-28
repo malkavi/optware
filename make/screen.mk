@@ -22,7 +22,7 @@
 SCREEN_SITE=http://ftp.gnu.org/gnu/screen/
 #ftp://ftp.uni-erlangen.de/pub/utilities/screen
 # ftp://ftp.ibiblio.org/pub/mirrors/gnu/ftp/gnu/screen/
-SCREEN_VERSION=4.2.1
+SCREEN_VERSION=4.3.1
 SCREEN_SOURCE=screen-$(SCREEN_VERSION).tar.gz
 SCREEN_DIR=screen-$(SCREEN_VERSION)
 SCREEN_UNZIP=zcat
